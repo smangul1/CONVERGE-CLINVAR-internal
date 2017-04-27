@@ -113,6 +113,11 @@ print pearsonr(freqList_converge,freqList_exac)
 
 out=open(args.out,"w")
 
+
+#header
+out.write("freqEXAC,freqCONVERGE,pos,allele_1,allele_2,REF_EXAC_COUNT,ALT_EXAC_COUNT,allele_1_count,allele_2_count")
+out.write("\n")
+
 for i in freqList:
     out.write(str(i[0])+","+str(i[1])+","+str(i[2])+","+str(i[3])+","+str(i[4])+","+str(i[5])+","+str(i[6])+","+str(i[7])+","+str(i[8]))
     out.write("\n")
