@@ -10,13 +10,20 @@ ap = argparse.ArgumentParser()
 ap.add_argument('inVCF', help='vcf from exac')
 ap.add_argument('out', help='')
 ap.add_argument('chr', help='')
-ap.add_argument('i', help='EUR NFE 8,18 EAS 4,16')
-ap.add_argument('j', help='')
+ap.add_argument('type', help='NFE or EAS')
+
 ap.add_argument('n', help='Number of individuals the varinat to be present in')
 
 
 
 args = ap.parse_args()
+
+
+
+if args.type!="NFE" and args.type!="EAS":
+    print "ERROR : type needs to be NFE or EAS"
+    sys.exit(1)
+
 
 
 out=open(args.out,"w")
@@ -27,8 +34,7 @@ out=open(args.out,"w")
 print "Read variants from ExAC vcf ...", args.inVCF
 number3rdAlele=0
 
-i=int(args.i)
-j=int(args.j)
+
 
 
 numberFiltered10K=0
@@ -44,16 +50,10 @@ with open(args.inVCF) as csvfile:
                     
                     if len(row[3])==1 and len(row[4])==1:
                     
-                    
+                        AC=int(row[7].split("AC_"+args.type)[1].split(";")[0].split("=")[1])
+                        AN=int(row[7].split("AN_"+args.type)[1].split(";")[0].split("=")[1])
+                        
 
-                        AC=int(row[7].split(";")[i].split("=")[1])
-                    
-                        AN=int(row[7].split(";")[j].split("=")[1])
-                        
-                        
-                        #print row
-                        #print row[7].split(";")[i].split("=")[0], row[7].split(";")[j].split("=")[0]
-                        
                         
                         
                         

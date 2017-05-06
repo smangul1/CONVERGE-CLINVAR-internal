@@ -45,7 +45,7 @@ with open(args.exacFreq) as csvfile:
             exacSet.add(pos)
 
 
-print "Number of variants from ExAC", len(exacSet)
+print args.exacFreq, "Number of variants from ExAC", len(exacSet)
 
 
 
