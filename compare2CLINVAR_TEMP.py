@@ -9,8 +9,7 @@ import numpy
 ap = argparse.ArgumentParser()
 ap.add_argument('inCLINVAR', help='CLINVAR file downloaded from https://github.com/macarthur-lab/clinvar')
 ap.add_argument('inCONVERGE', help='CLINVAR file downloaded from https://github.com/macarthur-lab/clinvar')
-ap.add_argument('legend', help='CLINVAR file downloaded from https://github.com/macarthur-lab/clinvar')
-
+ap.add_argument('inEXAC', help='CLINVAR file downloaded from https://github.com/macarthur-lab/clinvar')
 ap.add_argument('chr', help='chr')
 ap.add_argument('out', help='out')
 
@@ -22,16 +21,18 @@ ap.add_argument('out', help='out')
 args = ap.parse_args()
 
 
-#chrom   pos     ref     alt     measureset_type measureset_id   rcv     allele_id       symbol  hgvs_c  hgvs_p  molecular_consequence   clinical_significance   pathogenic      benign  conflicted      review_status   gold_stars      all_submitters  all_traits      all_pmids       inheritance_modes       age_of_onset    prevalence      disease_mechanism       origin  xrefs
 
-#1       949523  C       T       Variant 183381  RCV000162196    181485  ISG15   NM_005101.3:c.163C>T    NP_005092.1:p.Gln55Ter  NM_005101.3:c.163C>T:nonsense   Pathogenic      1       0       0       no assertion criteria provided  0       OMIM    Immunodeficiency 38 with basal ganglia calcification;IMMUNODEFICIENCY 38 WITH BASAL GANGLIA CALCIFICATION       25307056                Childhood       <1 / 1 000 000          germline        MedGen:CN221808;OMIM:616126;Orphanet:319563
+# Open CONVERGE
+
+#1       10388   2       21280   A:21126 T:154
 
 
+with open(args.inCONVERGE,'r') as f:
+    reader=csv.reader(f,delimiter="\t")
+    reader.next()
+    for line in reader:
 
-#1	97564154	C	T	Variant	437	RCV000000466	15476	DPYD-AS1	NM_000110.3:c.2657G>A	NP_000101.2:p.Arg886His	NM_000110.3:c.2657G>A:missense variant	Pathogenic	1	0	0	no assertion criteria provided	0	OMIM	Dihydropyrimidine dehydrogenase deficiency;DIHYDROPYRIMIDINE DEHYDROGENASE DEFICIENCY	9439663	Autosomal recessive inheritance	All agegermline	Genetic Alliance:Dihydropyrimidine+Dehydrogenase+Deficiency/2282;Genetic Testing Registry (GTR):GTR000329938;Genetic Testing Registry (GTR):GTR000503671;Genetic Testing Registry (GTR):GTR000509033;Genetic Testing Registry (GTR):GTR000509034;Genetic Testing Registry (GTR):GTR000509078;Genetic Testing Registry (GTR):GTR000509079;Genetic Testing Registry (GTR):GTR000509080;Genetic Testing Registry (GTR):GTR000509806;Genetic Testing Registry (GTR):GTR000552033;MedGen:C2720286;OMIM:274270;Office of Rare Diseases:19;Orphanet:1675
 
-#1	97564154	C	T	ALT	437	-	Pathogenic	1	no assertion criteria provided	0	NM_000110.3:c.2657G>A	NP_000101.2:p.Arg886His	OMIM	Dihydropyrimidine dehydrogenase deficiency;DIHYDROPYRIMIDINE DEHYDROGENASE DEFICIENCY	9439663	Autosomal recessive inheritance	All ages			germlineGenetic Alliance:Dihydropyrimidine+Dehydrogenase+Deficiency/2282;Genetic Testing Registry (GTR):GTR000329938;Genetic Testing Registry (GTR):GTR000503671;Genetic Testing Registry (GTR):GTR000509033;Genetic Testing Registry (GTR):GTR000509034;Genetic Testing Registry (GTR):GTR000509078;Genetic Testing Registry (GTR):GTR000509079;Genetic Testing Registry (GTR):GTR000509080;Genetic Testing Registry (GTR):GTR000509806;MedGen:C2720286;OMIM:274270;Office of Rare Diseases:19;Orphanet:1675
-#chrom   pos     ref     alt     mut     measureset_id   symbol  clinical_significance   pathogenic      benign  conflicted      review_status   gold_stars      hgvs_c  hgvs_p  all_submitters  all_traits      all_pmids       inheritance_modes       age_of_onset    prevalence      disease_mechanism       origin  xrefs
 
 
 

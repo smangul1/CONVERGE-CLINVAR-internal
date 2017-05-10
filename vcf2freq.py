@@ -45,23 +45,31 @@ with open(args.inVCF) as csvfile:
         if row!=[]:
             if "#" not in row[0] and row[0]==args.chr:
                 
-                if not((len(row[3])>1 and row[3].count(",")==0) or  (len(row[4])>1 and row[4].count(",")==0)):
+                
+                
+                
+                
+                
                     
                     
-                    if len(row[3])==1 and len(row[4])==1:
+                    
+                if len(row[3])==1 and len(row[4])==1:
                     
                         AC=int(row[7].split("AC_"+args.type)[1].split(";")[0].split("=")[1])
                         AN=int(row[7].split("AN_"+args.type)[1].split(";")[0].split("=")[1])
                         
 
                         
-                        
+                      
                         
                         if (AN/2)>int(args.n):
                             
                             
                             
-                            
+                            if row[1]=="45409472":
+                                print "1:",row[1],row[3],row[4]
+                        
+
                             
                             
                             #print row, AN_FIN+AN_NFE
@@ -80,10 +88,40 @@ with open(args.inVCF) as csvfile:
 #if AC_FIN.count(",")>0:
 #                            print AC_FIN
 #                            sys.exit(1)
-                    else:
-                        #print row,row[3],row[4],len(row[3]),len(row[4])
-                        #sys.exit(1)
+                else:
+                    
                         number3rdAlele+=1
+                        
+                        
+                        
+                        acList=[]
+                        acList[:]=[]
+                        
+                        anList=[]
+                        anList[:]=[]
+                        
+                        
+                        
+                        
+                        for i in row[3].split(","):
+                            for j in row[4].split(","):
+                                acList.append(i)
+                                anList.append(j)
+                    
+                        k=0
+                        for i in row[7].split("AN_"+args.type+"=")[1].split(";")[0].split(","):
+                            for j in row[7].split("AC_"+args.type+"=")[1].split(";")[0].split(","):
+                                i=int(i)
+                                j=int(j)
+                                if i==0:
+                                    out.write(row[0]+","+row[1]+","+row[2]+","+acList[k]+","+anList[k]+","+str(i)+","+str(j)+",0.0")
+
+                                else:
+                                    out.write(row[0]+","+row[1]+","+row[2]+","+acList[k]+","+anList[k]+","+str(i)+","+str(j)+","+str(1-float(int(j))/int(i)) )
+                                    out.write("\n")
+                                k+=1
+
+                        
 
                 #AN_FIN=int(row[7].split(";")[17].split("=")[1])
 #AN_NFE=int(row[7].split(";")[18].split("=")[1])
